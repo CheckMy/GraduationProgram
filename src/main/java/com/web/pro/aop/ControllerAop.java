@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -15,8 +16,9 @@ import java.util.Arrays;
  * @author xuweizhi
  * @date 2018/11/13 16:38
  */
-@Aspect //切面注解
+@Aspect
 @Component
+@Order(1)
 @Slf4j
 public class ControllerAop {
 
@@ -51,7 +53,7 @@ public class ControllerAop {
         log.info("请求的类名:" + declaringTypeName + ",方法名:" + methodName + ",入参:" + Arrays.toString(args));
     }
 
-    @Around("pointCut()")
+    /*@Around("pointCut()")
     public Object arround(ProceedingJoinPoint pjp) {
         try {
             //调用目标原有的方法
@@ -63,7 +65,7 @@ public class ControllerAop {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 
     @AfterThrowing("pointCut()")
     public void throwss(JoinPoint jp) {
