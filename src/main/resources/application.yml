@@ -1,0 +1,15 @@
+users:
+  name: jack
+  age: 21
+  arrays: 1,2,3,4,5
+  list1:
+  - address\u5317\u4EAC
+  - address\u4E0A\u6D77
+  list2:
+  - name: job
+    value: \u6253\u91CE
+  - name: finsh
+    value: \u9493\u9C7C
+  map1:
+    key1: \u540D\u5B57\u597D\u96BE\u53D6
+    key2: \u4F60\u7684\u60F3\u6CD5\u5F88\u5371\u9669
