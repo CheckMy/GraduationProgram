@@ -4,9 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-/**
- * @author xuweizhi
- */
+
 public class ProxyBean implements InvocationHandler {
 
     private Object target = null;

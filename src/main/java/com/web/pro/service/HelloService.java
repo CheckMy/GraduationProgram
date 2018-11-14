@@ -4,4 +4,6 @@ public interface HelloService {
 
     void sayHello(String name);
 
+    void hello();
+
 }
