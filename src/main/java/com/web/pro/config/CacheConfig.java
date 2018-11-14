@@ -18,6 +18,7 @@ import org.springframework.data.redis.serializer.*;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * @author xuweizhi
@@ -33,8 +34,34 @@ public class CacheConfig extends CachingConfigurerSupport {
         this.timeToLive = timeToLive;
     }
 
+    //RedisCacheManager的基本属性
+    //@SuppressWarnings("rawtypes") //
+    //配置redisTemplate 通过构造函数
+    //private final RedisOperations redisOperations;
+    ////是否使用前缀
+    //private boolean usePrefix = false;
+    ////默认前缀 为":"。使用前缀可以对缓存进行分组，避免缓存的冲突
+    //private RedisCachePrefix cachePrefix = new DefaultRedisCachePrefix();
+    ////远程加载缓存
+    //private boolean loadRemoteCachesOnStartup = false;
+    ////是否动态生成缓存。默认为true。这个就是上面如果缓存不存在，则创建
+    ////是通过这个属性进行配置。配置为false则不会去创建缓存
+    //private boolean dynamic = true;
+    //
+    //// 过期时间 0为永不过期
+    //private long defaultExpiration = 0;
+    ////可以配置指定key的过期时间 可以通过定制化配置过期时间
+    //private Map<String, Long> expires = null;
+    ////配置缓存名称集合
+    //private Set<String> configuredCacheNames;
+    ////缓存是否可以为null
+    //private final boolean cacheNullValues;
+
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
+        //Redis加锁的写入器
+        //RedisCacheWriter writer = RedisCacheWriter.lockingRedisCacheWriter(connectionFactory);
+        //启动Redis默认设置
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(this.timeToLive)
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
@@ -45,7 +72,6 @@ public class CacheConfig extends CachingConfigurerSupport {
                 .cacheDefaults(config)
                 .transactionAware()
                 .build();
-
         return redisCacheManager;
     }
 

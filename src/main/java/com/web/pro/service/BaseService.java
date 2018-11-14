@@ -8,6 +8,8 @@ public interface BaseService<T> {
 
     void delete(T t);
 
+    T update(T t);
+
     T getById(Integer id);
 
     List<T> findAll();

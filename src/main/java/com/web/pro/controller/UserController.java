@@ -27,4 +27,24 @@ public class UserController {
         userService.save(user);
         return user;
     }
+
+    @GetMapping("/get")
+    public User getUser(Integer id) {
+        return userService.getById(id);
+    }
+
+    @GetMapping("/update")
+    public User update(String name, Integer id) {
+        User byId = userService.getById(id);
+        byId.setUsername(name);
+        return userService.update(byId);
+    }
+
+    @GetMapping("/delete")
+    public void delete(Integer id) {
+        User user = new User();
+        user.setId(id);
+        userService.delete(user);
+    }
+
 }
