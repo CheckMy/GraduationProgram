@@ -1,5 +1,6 @@
 package com.web.pro.controller;
 
+import com.web.pro.annotatoin.UrlLogRequired;
 import com.web.pro.model.User;
 import com.web.pro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class UserController {
         return user;
     }
 
+    @UrlLogRequired(value = "查询单个数据",isLog = true)
     @GetMapping("/get")
     public User getUser(Integer id) {
         return userService.getById(id);

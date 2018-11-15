@@ -21,7 +21,7 @@ import java.util.List;
  * @Cacheable的cacheNames默认都是此值。当然@Cacheable也可以重定义cacheNames的值
  */
 @Service
-@CacheConfig(cacheNames={"cache1","cache2"})
+@CacheConfig(cacheNames="user")
 @Transactional
 public class UserServiceImpl implements UserService {
 
@@ -29,14 +29,14 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    @CachePut(key = "#root.method.getName()+#result.id")
+    @CachePut(key = "'user'+#result.id")
     public User save(User user) {
         userMapper.insert(user);
         return user;
     }
 
     @Override
-    @CacheEvict(key = "'save'+#user.id", beforeInvocation = false)
+    @CacheEvict(key = "'user'+#user.id", beforeInvocation = false)
     public void delete(User user) {
         userMapper.deleteByPrimaryKey(user.getId());
     }
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
      *
      */
     @Override
-    @CachePut(condition = "#result != 'null'", key = "'save'+#user.id")
+    @CachePut(condition = "#result != 'null'", key = "'user'+#user.id")
     public User update(User user) {
         User checkResult = userMapper.selectByPrimaryKey(user.getId());
         if (checkResult == null) {
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
      *  如果缓存中已经有数据，则多个线程可以同时从缓存中获取数据
      */
     @Override
-    @Cacheable(key = "'save'+#id",sync=true)
+    @Cacheable(key = "'user'+#id",sync=true)
     public User getById(Integer id) {
         return userMapper.selectByPrimaryKey(id);
     }

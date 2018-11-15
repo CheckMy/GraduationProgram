@@ -16,10 +16,10 @@ import java.util.Arrays;
  * @author xuweizhi
  * @date 2018/11/13 16:38
  */
-@Aspect
-@Component
-@Order(2)
-@Slf4j
+//@Aspect
+//@Component
+//@Order(2)
+//@Slf4j
 public class ControllerAop1 {
 
     //专业术语
@@ -33,19 +33,19 @@ public class ControllerAop1 {
     // 异常通知（afterThrowing advice）
     //4.切面（aspect）: 是一个可以定义切点，各类通知和引入的内容。
 
-    @Pointcut("execution(public * com.web.pro.controller.*.*(..))")
+   /* //@Pointcut("execution(public * com.web.pro.controller.*.*(..))")
     public void pointCut() {
     }
 
-    @Before("pointCut()")
+    //@Before("pointCut()")
     public void before(JoinPoint joinPoint) {
         log.info("Before Advice={}", "前置通知1");
     }
 
-    @After("pointCut()")
+    //@After("pointCut()")
     public void after() {
         log.info("After Advice={}", "1");
     }
-
+*/
 
 }
