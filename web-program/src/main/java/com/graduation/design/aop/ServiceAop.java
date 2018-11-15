@@ -33,13 +33,13 @@ public class ServiceAop {
     @Before("pointcut()")
     public void before(JoinPoint joinPoint) throws NoSuchMethodException {
         threadLocal.set(System.currentTimeMillis());
-         UrlControllerAop.otherLogPrint(joinPoint);
+         //UrlControllerAop.otherLogPrint(joinPoint);
     }
 
     @AfterReturning("pointcut()")
     public void afterReturning(JoinPoint joinPoint) {
-        log.info("class:"+joinPoint.getTarget().getClass().getName()+"; method:"+joinPoint.getSignature().getName()+"耗时 :{}",
-                ((System.currentTimeMillis() - threadLocal.get())) + "ms");
+        log.info("服务接口名称:"+joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName());
+        log.info("服务方法名称:{}", joinPoint.getSignature().getName()+"  耗时" +((System.currentTimeMillis() - threadLocal.get())) + "ms");
         threadLocal.remove();
     }
 

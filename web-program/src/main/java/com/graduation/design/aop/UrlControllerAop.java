@@ -56,7 +56,7 @@ public class UrlControllerAop {
         UrlLogRequired urlLogRequired = currentMethod.getAnnotation(UrlLogRequired.class);
         if (urlLogRequired != null && urlLogRequired.isLog()) {
             this.flag = urlLogRequired.isLog();
-            log.info("方法描述", urlLogRequired.value());
+            log.info("方法描述:", urlLogRequired.value());
             logPrint(joinPoint);
         }
     }
@@ -64,13 +64,13 @@ public class UrlControllerAop {
     @After("pointcut()")
     public void after(JoinPoint joinPoint) {
         if (flag)
-            log.info("after():{}", joinPoint.toString());
+            log.info("Controller执行方法:{}", joinPoint.toString());
     }
 
     @AfterReturning("pointcut()")
     public void afterReturning(JoinPoint joinPoint) {
         if (flag)
-            log.info("Class:" + joinPoint.getTarget().getClass().getSimpleName() + "耗时 :{}", ((System.currentTimeMillis() - threadLocal.get())) + "ms");
+            log.info("Controller处理类:" + joinPoint.getTarget().getClass().getSimpleName() + "耗时 :{}", ((System.currentTimeMillis() - threadLocal.get())) + "ms");
         this.flag = false;
         threadLocal.remove();
     }
@@ -78,12 +78,12 @@ public class UrlControllerAop {
     public void logPrint(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        log.info("Request URL: {}", request.getRequestURL().toString());
-        log.info("Request Method: {}", request.getMethod());
+        log.info("请求地址: {}", request.getRequestURL().toString()+" 请求类型:"+request.getMethod());
+        //log.info("请求方式: {}", request.getMethod());
         /*log.info("IP: {}", request.getRemoteAddr());
         log.info("User-Agent:{}", request.getHeader("User-Agent"));
         log.info("Cookies:{}", request.getCookies());*/
-        log.info("Class Method:{}", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        log.info("Controller请求方法:{}", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
         //log.info("Params:{}", Arrays.toString(joinPoint.getArgs()));
         Enumeration<String> enums = request.getParameterNames();
         StringBuffer sb = new StringBuffer();
@@ -92,11 +92,11 @@ public class UrlControllerAop {
             String paraName = enums.nextElement();
             sb.append(paraName + ": " + request.getParameter(paraName) + ", ");
         }
-        log.info("params {}", sb.toString().substring(0, sb.length() - 2) + "}");
+        log.info("Controller请求参数:{}", sb.toString().substring(0, sb.length() - 2) + "}");
     }
 
     public static void otherLogPrint(JoinPoint joinPoint) {
-        log.info("Interface:{}", joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName());
-        log.info("Method: {}", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        log.info("接口:{}", joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName());
+        log.info("方法:{}", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
     }
 }

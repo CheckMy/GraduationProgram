@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableCaching
 @EnableTransactionManagement
-//开启事务管理
 @MapperScan(basePackages = "com.graduation.design.mapper")
 public class WebProgramApplication {
 

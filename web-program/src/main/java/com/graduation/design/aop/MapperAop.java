@@ -37,13 +37,13 @@ public class MapperAop {
     @Before("pointcut()")
     public void before(JoinPoint joinPoint) throws NoSuchMethodException {
         threadLocal.set(System.currentTimeMillis());
-        UrlControllerAop.otherLogPrint(joinPoint);
+        //UrlControllerAop.otherLogPrint(joinPoint);
     }
 
     @AfterReturning("pointcut()")
     public void afterReturning(JoinPoint joinPoint) {
-        log.info("Interface:"+joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName()+"; method:"+joinPoint.getSignature().getName()+"耗时 :{}",
-                ((System.currentTimeMillis() - threadLocal.get())) + "ms");
+        log.info("Mapper层接口:"+joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName());
+        log.info("Mapper层类:{}", joinPoint.getSignature().getName()+"  耗时" +((System.currentTimeMillis() - threadLocal.get())) + "ms");
         threadLocal.remove();
     }
 

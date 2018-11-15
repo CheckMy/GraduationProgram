@@ -25,17 +25,17 @@ public class UserController {
 
     @GetMapping("/save")
     public User save() {
-        User user = new User("", "123456", "123456", "123456", 1, new Date(), "xx");
-        userService.save(user);
-        return user;
+        User user = new User("我们真是一个好人", "123456", "123456", "123456", 1, new Date(), "xx");
+        return userService.insert(user);
     }
 
     @UrlLogRequired(value = "查询单个数据", isLog = true)
     @GetMapping("/get")
     public User getUser(Integer id) {
-        return userService.getById(id);
+        return userService.findById(id);
     }
 
+    @UrlLogRequired(value = "更新数据", isLog = true)
     @GetMapping("/update")
     public User update(String name, Integer id) {
         User byId = userService.getById(id);
@@ -43,6 +43,7 @@ public class UserController {
         return userService.update(byId);
     }
 
+    @UrlLogRequired(value = "查询单个数据", isLog = true)
     @GetMapping("/delete")
     public void delete(Integer id) {
         User user = new User();

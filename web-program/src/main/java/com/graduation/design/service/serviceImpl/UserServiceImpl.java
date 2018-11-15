@@ -2,18 +2,22 @@ package com.graduation.design.service.serviceImpl;
 
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.graduation.design.mapper.UserMapper;
 import com.graduation.design.model.User;
 import com.graduation.design.model.UserExample;
+import com.graduation.design.service.BaseService;
 import com.graduation.design.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -25,18 +29,11 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "user")
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
     private UserMapper userMapper;
 
-
-    @Override
-    @CachePut(key = "'user'+#result.id")
-    public User save(User user) {
-        userMapper.insert(user);
-        return user;
-    }
 
     @Override
     @CacheEvict(key = "'user'+#user.id", beforeInvocation = false)
@@ -62,17 +59,18 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         userMapper.updateById(user);
+        System.out.println(user);
         return user;
     }
 
-    /***
-     * 如果设置sync=true，
-     *  如果缓存中没有数据，多个线程同时访问这个方法，则只有一个方法会执行到方法，其它方法需要等待
-     *  如果缓存中已经有数据，则多个线程可以同时从缓存中获取数据
+    /**
+     *如果设置sync=true，
+     *如果缓存中没有数据，多个线程同时访问这个方法，则只有一个方法会执行到方法，其它方法需要等待
+     *如果缓存中已经有数据，则多个线程可以同时从缓存中获取数据
      */
     @Override
     @Cacheable(key = "'user'+#id", sync = true)
-    public User getById(Integer id) {
+    public User findById(Integer id) {
         return userMapper.selectById(id);
     }
 
@@ -80,4 +78,12 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return null;
     }
+
+    @Override
+    @CachePut(key = "'user'+#result.id")
+    public User insert(User user) {
+        userMapper.insert(user);
+        return user;
+    }
+
 }
