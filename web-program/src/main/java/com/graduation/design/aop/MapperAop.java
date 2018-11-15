@@ -42,8 +42,9 @@ public class MapperAop {
 
     @AfterReturning("pointcut()")
     public void afterReturning(JoinPoint joinPoint) {
-        log.info("Mapper层接口:"+joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName());
-        log.info("Mapper层类:{}", joinPoint.getSignature().getName()+"  耗时" +((System.currentTimeMillis() - threadLocal.get())) + "ms");
+        String className = joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName();
+        String methodName =  joinPoint.getSignature().getName() + "  耗时" + ((System.currentTimeMillis() - threadLocal.get())) + "ms";
+        log.info("Mapper接口名称:{} 执行方法:{}", className,methodName);
         threadLocal.remove();
     }
 

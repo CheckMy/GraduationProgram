@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -13,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class User {
+public class User implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -43,5 +44,19 @@ public class User {
         this.role = role;
         this.createTime = createTime;
         this.apartment = apartment;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", role=" + role +
+                ", createTime=" + createTime +
+                ", apartment='" + apartment + '\'' +
+                '}';
     }
 }

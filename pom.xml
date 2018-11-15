@@ -9,6 +9,7 @@
     <modules>
         <module>web-program</module>
         <module>web-generator</module>
+        <module>web-create</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -25,7 +26,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <mybatisplus.version>3.0.5</mybatisplus.version>
         <web-program.version>1.0.0</web-program.version>
     </properties>

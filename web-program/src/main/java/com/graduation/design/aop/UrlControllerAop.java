@@ -56,7 +56,7 @@ public class UrlControllerAop {
         UrlLogRequired urlLogRequired = currentMethod.getAnnotation(UrlLogRequired.class);
         if (urlLogRequired != null && urlLogRequired.isLog()) {
             this.flag = urlLogRequired.isLog();
-            log.info("方法描述:", urlLogRequired.value());
+            log.info("方法描述:{}", urlLogRequired.value());
             logPrint(joinPoint);
         }
     }

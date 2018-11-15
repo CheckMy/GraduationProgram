@@ -62,7 +62,7 @@ public class MysqlGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://192.168.112.21:3306/wtf?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://192.168.86.21:3306/wtf?useUnicode=true&useSSL=false&characterEncoding=utf8");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
@@ -103,6 +103,8 @@ public class MysqlGenerator {
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         //strategy.setSuperEntityClass("com.baomidou.mybatisplus.samples.generator.common.BaseEntity");
         strategy.setEntityLombokModel(true);
+        strategy.setSuperServiceClass("com.graduation.design.service.BaseService");
+        strategy.setSuperServiceImplClass("com.graduation.design.service.serviceImpl.BaseServiceImpl");
         //strategy.setSuperControllerClass("com.baomidou.mybatisplus.samples.generator.common.BaseController");
         strategy.setInclude(scanner("表名"));
         //strategy.setSuperEntityColumns("id");
@@ -110,7 +112,7 @@ public class MysqlGenerator {
         strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
         // 选择 freemarker 引擎需要指定如下加，注意 pom 依赖必须有！
-        mpg.setTemplateEngine(new FreemarkerTemplateEngine());
+        //mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();
     }
 

@@ -29,7 +29,7 @@ import java.util.List;
 @Service
 @CacheConfig(cacheNames = "user")
 @Transactional
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
     private UserMapper userMapper;

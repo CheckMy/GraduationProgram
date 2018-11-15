@@ -18,6 +18,13 @@ server:
   servlet:
     context-path: /index
 spring:
+  rabbitmq:
+    host: 192.168.86.21
+    port: 5672
+    username: guest
+    password: guest
+    publisher-confirms: true
+    virtual-host: /
   redis:
     jedis:
       pool:
@@ -25,7 +32,7 @@ spring:
         max-active: 10
         max-idle: 10
         max-wait: 2000ms #连接池等待时间
-    host: 192.168.112.21
+    host: 192.168.86.21
     port: 6379
     timeout: 1000ms #连接时间
   mvc:
@@ -41,7 +48,7 @@ spring:
   application:
     name: MyProgram
   datasource:
-    url: jdbc:mysql://192.168.112.21:3306/wtf?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://192.168.86.21:3306/wtf?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
     username: root
     password: 158262751
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -113,6 +120,8 @@ spring:
 #    type-aliases-package: com.graduation.design.model
 #    mapper-locations: classpath:com/graduation/design/mapper/*.xml
   # iphone 有plus版本，mybatis也有plus？？？ T0T?
+  jackson:
+    date-format: yyyy:MM:dd HH:mm:ss
 mybatis-plus:
   #配置包扫描位置
   configuration:

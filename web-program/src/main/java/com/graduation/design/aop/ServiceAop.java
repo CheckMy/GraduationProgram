@@ -38,8 +38,9 @@ public class ServiceAop {
 
     @AfterReturning("pointcut()")
     public void afterReturning(JoinPoint joinPoint) {
-        log.info("服务接口名称:"+joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName());
-        log.info("服务方法名称:{}", joinPoint.getSignature().getName()+"  耗时" +((System.currentTimeMillis() - threadLocal.get())) + "ms");
+        String className = joinPoint.getTarget().getClass().getInterfaces()[0].getSimpleName();
+        String methodName =  joinPoint.getSignature().getName() + "  耗时" + ((System.currentTimeMillis() - threadLocal.get())) + "ms";
+        log.info("Service接口名称:{} 执行方法 :{}", className,methodName);
         threadLocal.remove();
     }
 
