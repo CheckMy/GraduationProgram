@@ -1,4 +1,4 @@
-package com.graduation.design.service.serviceImpl;
+package com.graduation.design.service.impl;
 
 import com.graduation.design.service.HelloService;
 import org.springframework.stereotype.Service;

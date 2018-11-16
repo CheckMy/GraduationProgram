@@ -1,7 +1,7 @@
 package com.graduation.design.fliter;
 
 import com.graduation.design.service.HelloService;
-import com.graduation.design.service.serviceImpl.HelloServiceImpl;
+import com.graduation.design.service.impl.HelloServiceImpl;
 
 /**
  * @author xuweizhi

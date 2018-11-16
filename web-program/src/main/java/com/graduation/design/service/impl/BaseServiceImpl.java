@@ -1,4 +1,4 @@
-package com.graduation.design.service.serviceImpl;
+package com.graduation.design.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.enums.SqlMethod;

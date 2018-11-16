@@ -1,23 +1,17 @@
-package com.graduation.design.service.serviceImpl;
+package com.graduation.design.service.impl;
 
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.graduation.design.mapper.UserMapper;
 import com.graduation.design.model.User;
-import com.graduation.design.model.UserExample;
-import com.graduation.design.service.BaseService;
 import com.graduation.design.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

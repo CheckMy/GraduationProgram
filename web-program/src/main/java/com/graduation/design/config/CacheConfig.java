@@ -63,7 +63,8 @@ public class CacheConfig extends CachingConfigurerSupport {
         //RedisCacheWriter writer = RedisCacheWriter.lockingRedisCacheWriter(connectionFactory);
         //启动Redis默认设置
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(this.timeToLive)
+                //.entryTtl(this.timeToLive)
+                .entryTtl(Duration.ofHours(1))
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()))
                 .disableCachingNullValues();

@@ -1,14 +1,15 @@
 package com.graduation.design.controller;
 
-import com.graduation.design.rabbit.CallBackSender;
-import com.graduation.design.rabbit.FanoutSender;
-import com.graduation.design.rabbit.HelloSender1;
-import com.graduation.design.rabbit.TopicSender;
+import com.graduation.design.rabbit.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @ClassName RabbitMQController
@@ -33,6 +34,9 @@ public class RabbitMQController {
 
     @Autowired
     private CallBackSender callBackSender;
+
+    @Autowired
+    private AnnotationRabbitMq annotationRabbitMq;
 
     @RequestMapping("/send")
     public String sendMessage() {
@@ -74,7 +78,21 @@ public class RabbitMQController {
         callBackSender.send();
     }
 
+    @GetMapping("/anno")
+    public void anno() {
+        annotationRabbitMq.send();
+    }
 
+    @GetMapping("/order")
+    public void order() {
+        annotationRabbitMq.sendOrder();
+    }
+
+    @Scheduled(cron = "30 12 * * * *")
+    public void datePrint(){
+        annotationRabbitMq.sendOrder();
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+    }
     /*@RabbitListener(queues = "helloQueue")
     @RabbitHandler
     public void receiveMessage(String hello){

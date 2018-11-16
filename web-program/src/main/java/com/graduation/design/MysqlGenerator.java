@@ -53,7 +53,7 @@ public class MysqlGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/web-generator/src/main/java");
+        gc.setOutputDir(projectPath + "/web-program/src/main/java");
         gc.setAuthor("xuweizhi");
         gc.setOpen(false);
         //去除service报名前缀i
@@ -88,7 +88,7 @@ public class MysqlGenerator {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输入文件名称
-                return projectPath + "/web-generator/src/main/java/com/graduation/" + pc.getModuleName()
+                return projectPath + "/web-program/src/main/java/com/graduation/" + pc.getModuleName()
                         + "/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
@@ -104,7 +104,7 @@ public class MysqlGenerator {
         //strategy.setSuperEntityClass("com.baomidou.mybatisplus.samples.generator.common.BaseEntity");
         strategy.setEntityLombokModel(true);
         strategy.setSuperServiceClass("com.graduation.design.service.BaseService");
-        strategy.setSuperServiceImplClass("com.graduation.design.service.serviceImpl.BaseServiceImpl");
+        strategy.setSuperServiceImplClass("com.graduation.design.service.impl.BaseServiceImpl");
         strategy.setRestControllerStyle(true);
         //strategy.setSuperControllerClass("com.baomidou.mybatisplus.samples.generator.common.BaseController");
         strategy.setInclude(scanner("表名"));
